@@ -1,4 +1,4 @@
-baseURL = 'https://x-dvr.github.io/'
+baseURL = 'https://x-dvr.github.io/dev-blog/'
 languageCode = 'en-us'
 title = 'Just a Random Dev Blog'
 theme = 'PaperMod'
