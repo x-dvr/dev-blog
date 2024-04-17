@@ -7,9 +7,12 @@ summary: "Sample article showcasing basic code syntax and formatting for HTML el
 tags: ["markdown", "syntax", "code"]
 categories: ["themes", "syntax"]
 series: ["Themes Guide"]
-# cover:
-#   image: /assets/images/msg.png
-#   caption: "Generated using [OG Image Playground by Vercel](https://og-playground.vercel.app/)"
+cover:
+  image: images/first-check.png
+  caption: "Generated using [OG Image Playground by Vercel](https://og-playground.vercel.app/)"
+  hidden: false # hide everywhere but not in structured data
+  hiddenInList: false # hide on list pages and home
+  hiddenInSingle: false # hide on single page
 ShowToc: true
 TocOpen: true
 draft: true
