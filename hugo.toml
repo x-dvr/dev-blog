@@ -69,7 +69,7 @@ tocopen = false
 
   [params.homeInfoParams]
   Title = "Hi there 👋"
-  Content = "My name is Denis. Welcome to my blog, where I'm sharing my ideas and experiences"
+  Content = "My name is Denis. Here I will be sharing my ideas and thoughts"
 
   # [[params.socialIcons]]
   # name = "x"
