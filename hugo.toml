@@ -37,6 +37,7 @@ hidemeta = false
 hideSummary = false
 showtoc = false
 tocopen = false
+custom_css = ["css/custom.css"]
 
   # [params.assets]
   # favicon = "<link / abs url>"
