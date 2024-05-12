@@ -772,4 +772,6 @@ This article is already quite big, so I stop here for now. In the next article w
 
 If you encountered any problems please check, that your code is the same as in my repository[^1].
 
+PS: I would really appreciate any constructive feedback. Please feel free to drop a comment [here](https://www.reddit.com/r/golang/comments/1cq9cnt/build_your_own_ci_system_in_go_part_1/).
+
 [^1]: Complete source code for this article can be found in [my repository](https://github.com/flow-ci/flow-ci/tree/6b8caddc2babd3ecf19e16333f749edc0fae2317) at commit `6b8caddc2babd3ecf19e16333f749edc0fae2317`.
