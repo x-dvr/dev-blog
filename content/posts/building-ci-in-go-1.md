@@ -106,7 +106,7 @@ As we discussed, we will start with very simple implementation, which reacts to 
  ├┬ internal
  │└┬ app
  │ └┬ web
- │ 	└┬ handlers
+ │  └┬ handlers
  │   └─ pipelines.go
  └─ pkg
 ```
