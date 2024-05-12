@@ -14,7 +14,11 @@ draft: false
 
 ## Intro  
   
-Welcome! Within this series of blog posts we will go step by step through the process of building your own simple CI system from scratch in Golang. But what exactly are we going to build? We will start small with a simple one-binary-server solution to execute our CI workload, and in addition to it, a small CLI tool to do the same on local machine of the developer. In later posts we will extend and improve it. Here needs to be a disclaimer: It will not be in any shape or form a "Jenkins killer" (at least not from the beginning 🙂). But it should be able at least to build itself from source and provide us an executable. Also I assume, tat you have a basic understanding of what CI is, you have installed and working Go toolchain, and you have a basic knowledge about Go and how it's module system works.
+Welcome! Within this series of blog posts we will go step by step through the process of building your own simple CI system from scratch in Golang. But what exactly are we going to build? We will start small with a simple one-binary-server solution to execute our CI workload, and in addition to it, a small CLI tool to do the same on local machine of the developer. In later posts we will extend and improve it.
+
+At this point one reasonable question can come to your mind: why do we even want to do this? For me, the main reason is: I want to experiment with different technics in CI/CD sphere. And for that I need some basis. In a hope that it will be interesting and useful for others too, I started writing this series. 
+
+Here needs also be a disclaimer: It will not be in any shape or form a "Jenkins killer" (at least not from the beginning 🙂). But it should be able at least to build itself from source and provide us an executable. Also I assume, tat you have a basic understanding of what CI is, you have installed and working Go toolchain, and you have a basic knowledge about Go and how it's module system works.
 
 With introduction out of the way, let's **Go**!  
 
