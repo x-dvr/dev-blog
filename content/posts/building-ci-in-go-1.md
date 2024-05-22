@@ -14,7 +14,7 @@ draft: false
 
 ## Intro  
   
-Welcome! Within this series of blog posts we will go step by step through the process of building your own simple CI system from scratch in Golang. But what exactly are we going to build? We will start small with a simple one-binary-server solution to execute our CI workload, and in addition to it, a small CLI tool to do the same on local machine of the developer. In later posts we will extend and improve it.
+Welcome! Within this series of blog posts we will go step by step through the process of building your own simple CI system from scratch in Golang. But what exactly are we going to build? We will start small with a simple one-binary-server solution to execute our CI workload. In later posts we will extend and improve it.
 
 At this point one reasonable question can come to your mind: why do we even want to do this? For me, the main reason is: I want to experiment with different technics in CI/CD sphere. And for that I need some basis. In a hope that it will be interesting and useful for others too, I started writing this series. 
 
@@ -111,7 +111,7 @@ As we discussed, we will start with very simple implementation, which reacts to 
  └─ pkg
 ```
 What do we have here?
- * `cmd` - contains entrypoints to our applications, and the code which is only relevant for one specific application. For now it contains only one directory `web`, for the HTTP server. In future we will also have `cli` directory.
+ * `cmd` - contains entrypoints to our applications, and the code which is only relevant for one specific application. For now it contains only one directory `web`, for the HTTP server.
  * `internal` - directory with a special meaning, code residing here, can't be imported from the outside of this repo. Here we will keep our business logic.
  * `pkg` - here we will put functionality which is not directly related with the business logic of our CI system, and which potentially can be useful in other projects.
 
@@ -267,9 +267,7 @@ func (ws *workspaceImpl) Env() []string {
 	return ws.env
 }
 ```
-And finally we need to implement two functions: to create workspace by cloning Git repository, and by using existing folder (which has Git repo in it) for future usage in cli application.
-
-Function to create workspace by cloning repository will accept three string arguments: root directory, url of remote git repo, and th branch to checkout. And will return either reference to created workspace or an error.
+And finally we need to implement a function to create workspace by cloning Git repository. It will accept three string arguments: root directory, url of remote git repo, and a branch to checkout. And will return either reference to created workspace or an error.
 ```go
 func NewWorkspaceFromGit(root string, url string, branch string) (*workspaceImpl, error) {
 ```
@@ -309,32 +307,6 @@ After cloning repository we are trying to extract information about current `HEA
 		env:    []string{},
 	}, nil
 ```
-Next one is the function to create workspace from current directory. It accepts only one argument: current directory. 
-```go
-func NewWorkspaceFromDir(dir string) (*workspaceImpl, error) {
-```
-First we are trying to open Git repository in the provided directory:
-```go
-	repo, err := git.PlainOpen(dir)
-	if err != nil {
-		return nil, err
-	}
-```
-And then we are doing effectively same thing as after clonning repository: extracting information about current `HEAD` commit, and instantiating Workspace entity with the information we have:
-```go
-	ref, err := repo.Head()
-	if err != nil {
-		return nil, err
-	}
-
-	return &workspaceImpl{
-		dir:    dir,
-		branch: ref.Name().Short(),
-		commit: ref.Hash().String(),
-		env:    []string{},
-	}, nil
-```
-
 The whole `workspace.go` file will look like this:
 ```go {linenos=true}
 package ci
@@ -370,25 +342,6 @@ func NewWorkspaceFromGit(root string, url string, branch string) (*workspaceImpl
 	return &workspaceImpl{
 		dir:    dir,
 		branch: branch,
-		commit: ref.Hash().String(),
-		env:    []string{},
-	}, nil
-}
-
-func NewWorkspaceFromDir(dir string) (*workspaceImpl, error) {
-	repo, err := git.PlainOpen(dir)
-	if err != nil {
-		return nil, err
-	}
-
-	ref, err := repo.Head()
-	if err != nil {
-		return nil, err
-	}
-
-	return &workspaceImpl{
-		dir:    dir,
-		branch: ref.Name().Short(),
 		commit: ref.Hash().String(),
 		env:    []string{},
 	}, nil
@@ -768,11 +721,11 @@ Commit: 6b8caddc2babd3ecf19e16333f749edc0fae2317
 In directory: ./tmp/workspace2016416224
 ```
 
-💃 Hooray 🕺! Our first pipeline is executed. Our CI is able to build itself. Serious milestone is achieved, but there is a very long road ahead of us, before this system becomes useful. In terms of functionality we need to add persistent storage, to keep track of all existing projects/pipelines, we need to add minimal web UI, and we should not also forget about CLI tool to easily run pipelines for local development. On top of that we also need to think about scalability. Building software is very resource-intensive operation, and one server will not be able to handle the load, so we need to split it into some kind of foreman-worker architecture, where main server is responsible for management tasks, and worker servers are only responsible for executing pipelines. And finally right now, our executor directly executes commands from pipeline, expecting that all required tooling is present in the system. That is not the case in real situations, that is why it makes sense to use containers for execution of pipeline steps.
+💃 Hooray 🕺! Our first pipeline is executed. Our CI is able to build itself. Serious milestone is achieved, but there is a very long road ahead of us, before this system becomes useful. In terms of functionality we need to add persistent storage, to keep track of all existing projects/pipelines, we need to add minimal web UI. On top of that we also need to think about scalability. Building software is very resource-intensive operation, and one server will not be able to handle the load, so we need to split it into some kind of foreman-worker architecture, where main server is responsible for management tasks, and worker servers are only responsible for executing pipelines. And finally right now, our executor directly executes commands from pipeline, expecting that all required tooling is present in the system. That is not the case in real situations, that is why it makes sense to use containers for execution of pipeline steps.
 
 ## Outro
 
-This article is already quite big, so I stop here for now. In the next article we will implement CLI tool, and will start working on containerization and scalability.
+This article is already quite big, so I stop here for now. In the next article we will start working on containerization and scalability.
 
 If you encountered any problems please check, that your code is the same as in my repository[^1].
 
