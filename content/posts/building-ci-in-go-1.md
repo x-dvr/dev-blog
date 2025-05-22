@@ -9,7 +9,7 @@ categories: ["Build your own X", "Golang"]
 series: ["Build your own CI"]
 ShowToc: true
 TocOpen: false
-draft: false
+draft: true
 ---
 
 ## Intro  

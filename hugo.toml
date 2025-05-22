@@ -70,7 +70,7 @@ custom_css = ["css/custom.css"]
 
   [params.homeInfoParams]
   Title = "Hi there 👋"
-  Content = "My name is Denis, I’m software engineering enthusiast, enjoying learning new stuff and researching tech. Here I’m sharing my ideas and thoughts."
+  Content = "My name is Denis, I'm software engineering enthusiast, who enjoys learning new stuff and researching tech. Here I'm sharing my ideas and thoughts."
 
   # [[params.socialIcons]]
   # name = "x"
