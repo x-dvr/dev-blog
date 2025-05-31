@@ -8,7 +8,7 @@ tags: ["Go", "Performance"]
 categories: ["Golang"]
 ShowToc: true
 TocOpen: false
-draft: true
+draft: false
 ---
 
 ## What is it all about?
@@ -424,13 +424,13 @@ BenchmarkHugeSourceCountLoop-16                      825           1447144 ns/op
 
 So, what can we learn from all this? First of all, there's more than one way to implement fan-in in Go — but not all approaches are created equal.
 
-The *canonical implementation*, while simple and idiomatic, performs remarkably well across all scenarios. Despite spawning one goroutine per input, it remains the fastest choice for small to moderately sized workloads. Even in large setups, it held its own, proving that sometimes the obvious solution is the right one.
+The *canonical implementation*, while simple and idiomatic, performs remarkably well across all scenarios. Despite spawning one goroutine per input, it remains the fastest choice for small to moderately sized workloads. Outperforming batched version by 1.3 times, and loop version by 2.6 times. Even in large setups, it held its own, significantly loosing only to loop-based version, proving that sometimes the obvious solution is the right one.
 
 The *reflection-based* approach, though flexible and elegant at first glance, comes at a significant cost. Its poor performance and massive memory allocation make it unsuitable for any performance-critical application. This experiment reaffirms a common Go wisdom: avoid reflection in the hot path.
 
 Our attempt to reduce goroutines with the *batching strategy* (using select over fixed groups of inputs) yielded mixed results. While it slightly outperformed the canonical version in the large-scale test. It fel of short to canonical implementation for small and medium sized workloads. It's a valid tradeoff in extreme situations where goroutine overhead must be minimized, but not a general-purpose win.
 
-Surprisingly, the *loop-based* approach (using a single goroutine with non-blocking selects) performed extremely well for large and medium input sets. Its simple structure and lower pressure on Go scheduler make it an interesting choice when you should avoid spawning many goroutines. However, its inefficiency in smaller setups and potential CPU waste make it a niche tool.
+Surprisingly, the *loop-based* approach (using a single goroutine with non-blocking selects) performed extremely well for large and medium input sets. Its simple structure and lower pressure on Go scheduler make it an interesting choice when you should avoid spawning many goroutines. In a heavy load scenario it outperformed canonical implementation by almost 2.8 times. However, its inefficiency in smaller setups and potential CPU waste make it a niche tool.
 
 ### TL;DR?
 
@@ -442,4 +442,4 @@ Surprisingly, the *loop-based* approach (using a single goroutine with non-block
 At the end of the day, Go gives us several ways to implement fan-in — and it’s up to us to pick the one that fits our needs best. If you're writing highly concurrent systems in Go, don't make assumptions, it's worth benchmarking your own workload.
 
 [^1]: Full source code including benchmarks can be found in [my repository](https://github.com/x-dvr/go_experiments/tree/master/fanin) inside `fanin` directory.
-[^2]: I did run benchmarks with more complex structured data types, but this does not change overall picture.
+[^2]: I did run benchmarks with more complex structured data types, but this did not change overall picture.
