@@ -430,16 +430,17 @@ The *reflection-based* approach, though flexible and elegant at first glance, co
 
 Our attempt to reduce goroutines with the *batching strategy* (using select over fixed groups of inputs) yielded mixed results. While it slightly outperformed the canonical version in the large-scale test. It fel of short to canonical implementation for small and medium sized workloads. It's a valid tradeoff in extreme situations where goroutine overhead must be minimized, but not a general-purpose win.
 
-Surprisingly, the *loop-based* approach (using a single goroutine with non-blocking selects) performed extremely well for large and medium input sets. Its simple structure and lower pressure on Go scheduler make it an interesting choice when you should avoid spawning many goroutines. In a heavy load scenario it outperformed canonical implementation by almost 2.8 times. However, its inefficiency in smaller setups and potential CPU waste make it a niche tool.
+Surprisingly, the *loop-based* approach (using a single goroutine with non-blocking selects) performed extremely well for large and medium input sets. Its simple structure and lower pressure on Go scheduler make it an interesting choice when you should avoid spawning many goroutines. In a heavy load scenario it outperformed canonical implementation by almost 2.8 times. However, its inefficiency in smaller setups and potential CPU waste[^3] make it a niche tool.
 
 ### TL;DR?
 
 - Canonical: Best all-around. Fast, simple, idiomatic. Use it by default.
-- Reflection: Avoid for performance-sensitive code.
+- Reflection-based: Avoid for performance-sensitive code.
 - Batch Select: A good option for high-scale setups, if you're OK with some extra code complexity.
-- Loop with Default: Works in a pinch for tons of channels, but can be CPU-hungry.
+- Loop-based: Works best for tons of input channels, but can potentially be CPU-hungry[^3].
 
 At the end of the day, Go gives us several ways to implement fan-in — and it’s up to us to pick the one that fits our needs best. If you're writing highly concurrent systems in Go, don't make assumptions, it's worth benchmarking your own workload.
 
 [^1]: Full source code including benchmarks can be found in [my repository](https://github.com/x-dvr/go_experiments/tree/master/fanin) inside `fanin` directory.
 [^2]: I did run benchmarks with more complex structured data types, but this did not change overall picture.
+[^3]: I ran both worker pool benchmarks for 20 seconds using perf. The loop-based version executed 276 billion instructions, compared to 166 billion for the canonical one. Interestingly, despite doing more work, the loop version only used about 1.61 logical CPUs on average, while the canonical version used 1.86.
