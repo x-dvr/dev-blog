@@ -2,7 +2,7 @@
 author: ["Denis Rodin"]
 title: "Weird behavior of Go compiler/runtime"
 date: "2025-05-20"
-description: "Importing runtime package may heavily affects benchmark results in some cases"
+description: "Importing runtime package may heavily affect benchmark results in some cases"
 # summary: ""
 tags: ["Go", "Performance"]
 categories: ["Golang"]
