@@ -8,7 +8,7 @@ tags: ["Go", "Performance"]
 categories: ["Golang"]
 ShowToc: true
 TocOpen: false
-draft: false
+draft: true
 ---
 
 ## Strange optimization
