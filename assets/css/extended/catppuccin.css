@@ -86,6 +86,12 @@
 a { color: var(--ctp-blue); }
 a:hover { color: var(--ctp-lavender); }
 
+mark,
+::selection {
+    background-color: var(--ctp-yellow);
+    color: var(--ctp-crust);
+}
+
 /* override PaperMod's hardcoded rgb(213, 213, 214) on code block fallback text */
 .md-content pre code { color: var(--ctp-text); }
 
