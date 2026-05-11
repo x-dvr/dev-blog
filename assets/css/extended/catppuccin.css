@@ -94,3 +94,20 @@ a:hover { color: var(--ctp-lavender); }
     color: var(--ctp-text);
     background: var(--ctp-surface2);
 }
+
+/* gist shortcode (rendered at build time via chroma) */
+.gist .gist-file + .gist-file { margin-top: var(--content-gap); }
+.gist .gist-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    background: var(--ctp-mantle);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+.gist .gist-filename { font-weight: bold; color: var(--ctp-text); }
+.gist .gist-source  { color: var(--ctp-subtext0); }
+.gist .highlight    { margin: 0 !important; border-radius: var(--radius) var(--radius) 0 0; }

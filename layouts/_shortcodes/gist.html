@@ -1,8 +1,25 @@
-{{- $user := .Get 0 -}}
+{{- /* Fetch a GitHub gist at build time and render via Hugo's chroma so it
+       inherits the site's syntax-highlighting theme (and light/dark toggle).
+       Usage: {{< gist user id [file] >}} */ -}}
 {{- $id := .Get 1 -}}
-{{- $file := .Get 2 -}}
-{{- $src := printf "https://gist.github.com/%s/%s.js" $user $id -}}
-{{- with $file -}}
-  {{- $src = printf "%s?file=%s" $src . -}}
+{{- $only := .Get 2 -}}
+{{- $apiURL := printf "https://api.github.com/gists/%s" $id -}}
+{{- with resources.GetRemote $apiURL -}}
+  {{- $data := . | transform.Unmarshal -}}
+  <div class="gist">
+    {{- range $name, $f := $data.files -}}
+      {{- if or (not $only) (eq $name $only) -}}
+        {{- $lang := lower (or $f.language "") -}}
+        <div class="gist-file">
+          {{ transform.Highlight $f.content $lang "" }}
+          <div class="gist-meta">
+            <a class="gist-filename" href="{{ $f.raw_url }}">{{ $name }}</a>
+            <a class="gist-source" href="https://gist.github.com/{{ $id }}">view on GitHub</a>
+          </div>
+        </div>
+      {{- end -}}
+    {{- end -}}
+  </div>
+{{- else -}}
+  {{ errorf "gist %q fetch failed" $id }}
 {{- end -}}
-<script type="application/javascript" src="{{ $src }}"></script>
