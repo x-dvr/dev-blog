@@ -1,5 +1,5 @@
 baseURL = 'https://x-dvr.github.io/dev-blog/'
-languageCode = 'en-us'
+locale = 'en-us'
 title = 'Just a Random Dev Blog'
 theme = 'PaperMod'
 enableRobotsTXT = true
