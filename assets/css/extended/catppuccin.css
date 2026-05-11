@@ -85,3 +85,12 @@
 
 a { color: var(--ctp-blue); }
 a:hover { color: var(--ctp-lavender); }
+
+/* override PaperMod's hardcoded rgb(213, 213, 214) on code block fallback text */
+.md-content pre code { color: var(--ctp-text); }
+
+/* override PaperMod's hardcoded copy-code button colors */
+.copy-code {
+    color: var(--ctp-text);
+    background: var(--ctp-surface2);
+}

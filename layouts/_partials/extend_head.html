@@ -1,0 +1,24 @@
+{{- /* Override PaperMod's hardcoded noscript dark-mode fallback with Catppuccin Frappé. */}}
+{{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
+<noscript>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme:         #303446;
+                --entry:         #292c3c;
+                --primary:       #c6d0f5;
+                --secondary:     #a5adce;
+                --tertiary:      #51576d;
+                --content:       #c6d0f5;
+                --code-block-bg: #232634;
+                --code-bg:       #414559;
+                --border:        #51576d;
+                color-scheme: dark;
+            }
+
+            .list { background: var(--theme); }
+            .toc  { background: var(--entry); }
+        }
+    </style>
+</noscript>
+{{- end }}

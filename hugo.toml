@@ -39,7 +39,10 @@ showtoc = false
 tocopen = false
 custom_css = ["css/custom.css"]
 
-  # [params.assets]
+  [params.assets]
+  # Catppuccin Frappé mantle — used for mobile browser chrome
+  theme_color = "#292c3c"
+  msapplication_TileColor = "#292c3c"
   # favicon = "<link / abs url>"
   # favicon16x16 = "<link / abs url>"
   # favicon32x32 = "<link / abs url>"
