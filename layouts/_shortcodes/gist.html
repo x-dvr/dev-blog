@@ -1,0 +1,8 @@
+{{- $user := .Get 0 -}}
+{{- $id := .Get 1 -}}
+{{- $file := .Get 2 -}}
+{{- $src := printf "https://gist.github.com/%s/%s.js" $user $id -}}
+{{- with $file -}}
+  {{- $src = printf "%s?file=%s" $src . -}}
+{{- end -}}
+<script type="application/javascript" src="{{ $src }}"></script>

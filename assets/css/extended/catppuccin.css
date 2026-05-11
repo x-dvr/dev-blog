@@ -1,0 +1,87 @@
+/* Catppuccin Latte (light) — https://catppuccin.com/palette/ */
+:root {
+    --ctp-rosewater: #dc8a78;
+    --ctp-flamingo:  #dd7878;
+    --ctp-pink:      #ea76cb;
+    --ctp-mauve:     #8839ef;
+    --ctp-red:       #d20f39;
+    --ctp-maroon:    #e64553;
+    --ctp-peach:     #fe640b;
+    --ctp-yellow:    #df8e1d;
+    --ctp-green:     #40a02b;
+    --ctp-teal:      #179299;
+    --ctp-sky:       #04a5e5;
+    --ctp-sapphire:  #209fb5;
+    --ctp-blue:      #1e66f5;
+    --ctp-lavender:  #7287fd;
+    --ctp-text:      #4c4f69;
+    --ctp-subtext1:  #5c5f77;
+    --ctp-subtext0:  #6c6f85;
+    --ctp-overlay2:  #7c7f93;
+    --ctp-overlay1:  #8c8fa1;
+    --ctp-overlay0:  #9ca0b0;
+    --ctp-surface2:  #acb0be;
+    --ctp-surface1:  #bcc0cc;
+    --ctp-surface0:  #ccd0da;
+    --ctp-base:      #eff1f5;
+    --ctp-mantle:    #e6e9ef;
+    --ctp-crust:     #dce0e8;
+
+    --theme:         var(--ctp-base);
+    --entry:         var(--ctp-mantle);
+    --primary:       var(--ctp-text);
+    --secondary:     var(--ctp-subtext0);
+    --tertiary:      var(--ctp-surface1);
+    --content:       var(--ctp-text);
+    --code-block-bg: var(--ctp-crust);
+    --code-bg:       var(--ctp-surface0);
+    --border:        var(--ctp-surface0);
+    color-scheme: light;
+}
+
+/* Catppuccin Frappé (dark) */
+:root[data-theme="dark"] {
+    --ctp-rosewater: #f2d5cf;
+    --ctp-flamingo:  #eebebe;
+    --ctp-pink:      #f4b8e4;
+    --ctp-mauve:     #ca9ee6;
+    --ctp-red:       #e78284;
+    --ctp-maroon:    #ea999c;
+    --ctp-peach:     #ef9f76;
+    --ctp-yellow:    #e5c890;
+    --ctp-green:     #a6d189;
+    --ctp-teal:      #81c8be;
+    --ctp-sky:       #99d1db;
+    --ctp-sapphire:  #85c1dc;
+    --ctp-blue:      #8caaee;
+    --ctp-lavender:  #babbf1;
+    --ctp-text:      #c6d0f5;
+    --ctp-subtext1:  #b5bfe2;
+    --ctp-subtext0:  #a5adce;
+    --ctp-overlay2:  #949cbb;
+    --ctp-overlay1:  #838ba7;
+    --ctp-overlay0:  #737994;
+    --ctp-surface2:  #626880;
+    --ctp-surface1:  #51576d;
+    --ctp-surface0:  #414559;
+    --ctp-base:      #303446;
+    --ctp-mantle:    #292c3c;
+    --ctp-crust:     #232634;
+
+    --theme:         var(--ctp-base);
+    --entry:         var(--ctp-mantle);
+    --primary:       var(--ctp-text);
+    --secondary:     var(--ctp-subtext0);
+    --tertiary:      var(--ctp-surface1);
+    --content:       var(--ctp-text);
+    --code-block-bg: var(--ctp-crust);
+    --code-bg:       var(--ctp-surface0);
+    --border:        var(--ctp-surface1);
+    color-scheme: dark;
+}
+
+.list { background: var(--ctp-mantle); }
+[data-theme="dark"] .list { background: var(--theme); }
+
+a { color: var(--ctp-blue); }
+a:hover { color: var(--ctp-lavender); }
